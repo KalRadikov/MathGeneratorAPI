@@ -51,6 +51,11 @@ namespace MathGeneratorREST.Services
                 return false;
             }
 
+            if (numProblems < 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(numProblems));
+            }
+
             //validate min operations
             if (minOperations.HasValue)
             {
