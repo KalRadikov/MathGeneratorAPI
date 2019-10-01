@@ -5,4 +5,4 @@ The default URI generates 4 problems with 2 minimum operations:
 http://mathgeneratorapi.azurewebsites.net/api/mathproblem
 
 To use the parameters from the API:
-http://mathgeneratorapi.azurewebsites.net/api/mathproblem/<Number of problems to generate>/<Min Operations>/<Max Operations>
+http://mathgeneratorapi.azurewebsites.net/api/mathproblem/{Number of problems to generate}/{Min Operations}/{Max Operations}
