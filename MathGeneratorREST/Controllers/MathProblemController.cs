@@ -30,10 +30,18 @@ namespace MathGeneratorREST.Controllers
         [HttpGet("{numProblems}/{min?}/{max?}", Name = "Get")]
         public IActionResult Get(int numProblems, int? min, int? max)
         {
-            var data = _mathService.Generate(numProblems, min, max);
+            try
+            {
+                var data = _mathService.Generate(numProblems, min, max);
 
-            if (data != null)
-                return Ok(data);
+                if (data != null)
+                    return Ok(data);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+
             return NotFound();
         }
 
