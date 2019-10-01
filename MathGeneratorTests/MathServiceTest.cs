@@ -18,8 +18,8 @@ namespace MathGeneratorTests
             var expressions = service.Generate(expectedProblems, null, null);
 
             var numProblems = expressions.Split('\n').Length - 1;
-            Assert.AreEqual(expectedProblems,numProblems);
 
+            Assert.AreEqual(expectedProblems,numProblems);
         }
 
         [TestMethod]
@@ -46,6 +46,21 @@ namespace MathGeneratorTests
 
                 Assert.IsTrue(minOperations <= count && maxOperations >= count);
             }
+        }
+
+        [TestMethod]
+        public void GenerateDivideByZeroProblem()
+        {
+            var service = new MathService();
+
+            var expectedProblems = 20;
+
+            var expressions = service.Generate(expectedProblems, null, null);
+
+            var indexOfZero = expressions.IndexOf("/ 0", StringComparison.Ordinal);
+            
+            Assert.AreEqual(-1, indexOfZero);
+
         }
 
         [TestMethod]

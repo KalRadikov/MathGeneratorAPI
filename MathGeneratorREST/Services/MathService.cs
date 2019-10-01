@@ -9,6 +9,8 @@ namespace MathGeneratorREST.Services
     public class MathService : IMathService
     {
         private readonly List<char> _operationsList;
+        private const int DEFAULT_MAX_NUM = 20;
+        private const int DEFAULT_MIN_NUM = 0;
         private const int DEFAULT_NUM_OPERATIONS = 10;
 
         public MathService()
@@ -91,11 +93,20 @@ namespace MathGeneratorREST.Services
             for (int i = 0; i < operations.Count; i++)
             {
                 expression += operations[i] + " ";
-                expression += numbers[i] + " ";
+                expression += numbers[i+1] + " ";
             }
 
-            return expression;
+            var cleanExpression = DivideByZeroCheck(expression);
+
+            return cleanExpression;
         }
+
+        private string DivideByZeroCheck(string expression)
+        {
+            var substitue = RandomNumberGenerator.GetInt32(DEFAULT_MIN_NUM, DEFAULT_MAX_NUM);
+            return expression.Replace("/ 0", $"/ {substitue}");
+        }
+
         private List<char> GenerateOperationsArray(int? minOperations, int? maxOperations)
         {
             Random rng = new Random();
@@ -147,7 +158,7 @@ namespace MathGeneratorREST.Services
             var numbersArray = new List<int>();
 
             for (int i = 0; i < size; i++)
-                numbersArray.Add(RandomNumberGenerator.GetInt32(0, 20));
+                numbersArray.Add(RandomNumberGenerator.GetInt32(DEFAULT_MIN_NUM, DEFAULT_MAX_NUM));
 
             return numbersArray;
         }
